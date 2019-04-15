@@ -1,4 +1,4 @@
-#Fri Apr 12 16:52:27 EDT 2019
+#Mon Apr 15 17:07:46 EDT 2019
 base.0=/Users/mattdegoey/code/l5r_companion/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

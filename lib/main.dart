@@ -44,10 +44,47 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _fateCount = 100;
-  int _honorCount = 100;
-  int _militaryCount = 100;
-  int _politicalCount = 100;
+  int _fateCount = 0;
+  int _honorCount = 0;
+  int _conflictCount = 0;
+  // int _militaryCount = 0;
+  // int _politicalCount = 0;
+
+  void _incrementFateCounter() {
+    setState(() {
+      _fateCount++;
+    });
+  }
+
+  void _decrementFateCounter() {
+    setState(() {
+      _fateCount--;
+    });
+  }
+
+  void _incrementHonorCounter() {
+    setState(() {
+      _honorCount++;
+    });
+  }
+
+  void _decrementHonorCounter() {
+    setState(() {
+      _honorCount--;
+    });
+  }
+
+  void _incrementConflictCounter() {
+    setState(() {
+      _conflictCount++;
+    });
+  }
+
+  void _decrementConflictCounter() {
+    setState(() {
+      _conflictCount--;
+    });
+  }
 
   // void _incrementCounter() {
   //   setState(() {
@@ -74,172 +111,437 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('images/Shiro_no_Yojin.jpeg'),
-              fit: BoxFit.cover),
-        ),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: _statusButtons(),
-            ),
-            Expanded(
-              child: Text(''),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: _counterButtons(),
-            ),
-          ],
-        ),
-      ),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/Shiro_no_Yojin.jpeg'),
+                fit: BoxFit.cover),
+          ),
+          constraints: BoxConstraints.expand(),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: _fateCounter(),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: _honorCounter(),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: _conflictCounter(),
+              ),
+            ],
+          )),
     );
   }
 
-  Widget _statusButtons() {
+  // Widget _statusButtons() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //     children: <Widget>[_firstPlayerButton(), _imperialFavorButton()],
+  //   );
+  // }
+
+  // Widget _firstPlayerButton() {
+  //   return RaisedButton(
+  //     elevation: 5,
+  //     onPressed: () {},
+  //     color: Colors.blue,
+  //     textColor: Colors.white,
+  //     child: Text(
+  //       'First Player',
+  //       style: TextStyle(fontSize: 24),
+  //     ),
+  //   );
+  // }
+
+  // Widget _imperialFavorButton() {
+  //   return RaisedButton(
+  //     elevation: 5,
+  //     onPressed: () {},
+  //     color: Colors.blue,
+  //     textColor: Colors.white,
+  //     child: Text(
+  //       'Imperial Favor',
+  //       style: TextStyle(fontSize: 24),
+  //     ),
+  //   );
+  // }
+
+  // Widget _resourceButtons() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     children: <Widget>[_fateButton(), _honorButton()],
+  //   );
+  // }
+
+  // Widget _statusCounters() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.stretch,
+  //     children: <Widget>[_fateCounter(), _honorCounter(), _conflictCounter()],
+  //   );
+  // }
+
+  Widget _fateCounter() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[_firstPlayerButton(), _imperialFavorButton()],
-    );
-  }
-
-  Widget _firstPlayerButton() {
-    return RaisedButton(
-      elevation: 5,
-      onPressed: () {},
-      color: Colors.blue,
-      textColor: Colors.white,
-      child: Text(
-        'First Player',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-
-  Widget _imperialFavorButton() {
-    return RaisedButton(
-      elevation: 5,
-      onPressed: () {},
-      color: Colors.blue,
-      textColor: Colors.white,
-      child: Text(
-        'Imperial Favor',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-
-  Widget _counterButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        _fateButton(),
-        _honorButton(),
-        _militaryButton(),
-        _politicalButton()
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Colors.pinkAccent,
+            child: Align(
+              alignment: Alignment(-0.5, 0),
+              child: IconButton(
+                onPressed: null,
+                icon: Icon(
+                  FiveRingsDB.unique,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.pinkAccent,
+            child: IconButton(
+              onPressed: () {
+                _decrementFateCounter();
+              },
+              icon: Icon(
+                Icons.remove_circle,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            alignment: Alignment(0, 0),
+            color: Colors.pinkAccent,
+            child: Text(
+              _fateCount.toString(),
+              style: TextStyle(
+                fontSize: 31,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.pinkAccent,
+            child: IconButton(
+              onPressed: () {
+                _incrementFateCounter();
+              },
+              icon: Icon(
+                Icons.add_circle,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
 
-  Widget _fateButton() {
-    return RaisedButton(
-      onPressed: () {},
-      shape: CircleBorder(),
-      elevation: 20,
-      color: Colors.pinkAccent,
-      textColor: Colors.white,
-      padding: EdgeInsets.all(10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Icon(
-            FiveRingsDB.unique,
-            size: 30,
-          ),
-          Text(
-            _fateCount.toString(),
-            style: TextStyle(fontSize: 25),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _honorButton() {
-    return RaisedButton(
-      onPressed: () {},
-      shape: CircleBorder(),
-      elevation: 20,
-      color: Colors.orange,
-      textColor: Colors.white,
-      padding: EdgeInsets.all(10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Icon(
-            FiveRingsDB.element_all,
-            size: 30,
-          ),
-          Text(
-            _honorCount.toString(),
-            style: TextStyle(fontSize: 25),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _militaryButton() {
-    return RaisedButton(
-      onPressed: () {},
-      shape: CircleBorder(),
-      elevation: 20,
-      color: Colors.red,
-      textColor: Colors.white,
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          Transform(
-            transform: Matrix4.identity()..translate(-4.5),
-            child: Icon(
-              FiveRingsDB.conflict_military,
-              size: 30,
+  Widget _honorCounter() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Colors.orange,
+            child: Align(
+              alignment: Alignment(-0.5, 0),
+              child: IconButton(
+                onPressed: null,
+                icon: Icon(
+                  FiveRingsDB.element_all,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
             ),
           ),
-          Text(
-            _militaryCount.toString(),
-            style: TextStyle(fontSize: 25),
-          )
-        ],
-      ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.orange,
+            child: IconButton(
+              onPressed: () {
+                _decrementHonorCounter();
+              },
+              icon: Icon(
+                Icons.remove_circle,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            alignment: Alignment(0, 0),
+            color: Colors.orange,
+            child: Text(
+              _honorCount.toString(),
+              style: TextStyle(
+                fontSize: 31,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.orange,
+            child: IconButton(
+              onPressed: () {
+                _incrementHonorCounter();
+              },
+              icon: Icon(
+                Icons.add_circle,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _politicalButton() {
-    return RaisedButton(
-      onPressed: () {},
-      shape: CircleBorder(),
-      elevation: 20,
-      color: Colors.blue,
-      textColor: Colors.white,
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          Transform(
-            transform: Matrix4.identity()..translate(-7.5),
-            child: Icon(
-              FiveRingsDB.conflict_political,
-              size: 30,
+  Widget _conflictCounter() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Colors.red,
+            child: Row(
+              children: <Widget>[
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    FiveRingsDB.conflict_military,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    FiveRingsDB.conflict_political,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ],
             ),
           ),
-          Text(
-            _politicalCount.toString(),
-            style: TextStyle(fontSize: 25),
-          )
-        ],
-      ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.red,
+            child: IconButton(
+              onPressed: () {
+                _decrementConflictCounter();
+              },
+              icon: Icon(
+                Icons.remove_circle,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            alignment: Alignment(0, 0),
+            color: Colors.red,
+            child: Text(
+              _conflictCount.toString(),
+              style: TextStyle(
+                fontSize: 31,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.red,
+            child: IconButton(
+              onPressed: () {
+                _incrementConflictCounter();
+              },
+              icon: Icon(
+                Icons.add_circle,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
+
+  // Widget _conflictButtons() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     children: <Widget>[_militaryButton(), _politicalButton()],
+  //   );
+  // }
+
+  // Widget _counterButtons() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     children: <Widget>[
+  //       _fateButton(),
+  //       _honorButton(),
+  //       _militaryButton(),
+  //       _politicalButton()
+  //     ],
+  //   );
+  // }
+
+  // Widget _fateButton() {
+  //   return ButtonTheme(
+  //     minWidth: 150,
+  //     height: 150,
+  //     child: RaisedButton(
+  //       onPressed: () {},
+  //       shape: CircleBorder(),
+  //       elevation: 20,
+  //       color: Colors.pinkAccent,
+  //       textColor: Colors.white,
+  //       padding: EdgeInsets.all(10),
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //         children: <Widget>[
+  //           Icon(
+  //             FiveRingsDB.unique,
+  //             size: 50,
+  //           ),
+  //           Text(
+  //             _fateCount.toString(),
+  //             style: TextStyle(fontSize: 45),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // Widget _honorButton() {
+  //   return ButtonTheme(
+  //     minWidth: 150,
+  //     height: 150,
+  //     child: RaisedButton(
+  //       onPressed: () {},
+  //       shape: CircleBorder(),
+  //       elevation: 20,
+  //       color: Colors.orange,
+  //       textColor: Colors.white,
+  //       padding: EdgeInsets.all(10),
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //         children: <Widget>[
+  //           Icon(
+  //             FiveRingsDB.element_all,
+  //             size: 50,
+  //           ),
+  //           Text(
+  //             _honorCount.toString(),
+  //             style: TextStyle(fontSize: 45),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // Widget _militaryButton() {
+  //   return ButtonTheme(
+  //     minWidth: 150,
+  //     height: 150,
+  //     child: RaisedButton(
+  //       onPressed: () {},
+  //       shape: CircleBorder(),
+  //       elevation: 20,
+  //       color: Colors.red,
+  //       textColor: Colors.white,
+  //       padding: EdgeInsets.all(10),
+  //       child: Column(
+  //         children: <Widget>[
+  //           Transform(
+  //             transform: Matrix4.identity()..translate(-7.0),
+  //             child: Icon(
+  //               FiveRingsDB.conflict_military,
+  //               size: 50,
+  //             ),
+  //           ),
+  //           Text(
+  //             _militaryCount.toString(),
+  //             style: TextStyle(fontSize: 45),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // Widget _politicalButton() {
+  //   return ButtonTheme(
+  //     minWidth: 150,
+  //     height: 150,
+  //     child: RaisedButton(
+  //       onPressed: () {},
+  //       shape: CircleBorder(),
+  //       elevation: 20,
+  //       color: Colors.blue,
+  //       textColor: Colors.white,
+  //       padding: EdgeInsets.all(10),
+  //       child: Column(
+  //         children: <Widget>[
+  //           Transform(
+  //             transform: Matrix4.identity()..translate(-12.0),
+  //             child: Icon(
+  //               FiveRingsDB.conflict_political,
+  //               size: 50,
+  //             ),
+  //           ),
+  //           Text(
+  //             _politicalCount.toString(),
+  //             style: TextStyle(fontSize: 45),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // Dialog resourceDialog = Dialog(
+  //   child: Container(
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         FlatButton.icon(
+  //           onPressed: () {},
+  //           icon: Icon(Icons.remove),
+  //           label: Text('Remove'),
+  //         ),
+  //         Expanded(
+  //           child: Text(''),
+  //         ),
+  //         FlatButton.icon(
+  //             onPressed: () {}, icon: Icon(Icons.add), label: Text('')),
+  //       ],
+  //     ),
+  //   ),
+  // );
 }
